@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+
+     <head>
+          <title>canvasButton test</title>
+     </head>
+
+     <body>
+          <canvas width="1000" height="500" id="testCanvas">your browser does not support the canvas element</canvas>
+     </body>
+
+     <script src="canvasButton.js"></script>
+     <script>
+          var c = document.getElementById("testCanvas");
+          var ctx = c.getContext('2d');
+
+          var testButton = new canvasButton(100, 100, 200, 100);
+          testButton.setText("testing", "30px Arial");
+          testButton.onclick = "wasClicked()";
+          testButton.enableClicking(c);
+
+          function wasClicked() {
+               alert("clicked");
+          }
+
+          var backgroundGrays = 0;
+
+          setInterval(function () {
+               backgroundGrays += 10;
+
+               if (backgroundGrays > 255) {
+                    backgroundGrays = 0;
+               }
+
+               ctx.fillStyle = "rgb(" + backgroundGrays + "," + backgroundGrays + "," + backgroundGrays + ")";
+               ctx.fillRect(0, 0, c.width, c.height);
+
+               testButton.drawButton(ctx);
+          }, 100);
+     </script>
+
+</html>
